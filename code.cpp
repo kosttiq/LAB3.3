@@ -20,7 +20,14 @@ int poli(int chislo) {
     else
         return 0;
 }
-
+int kol_vo_poli(int*& massiv, int n) {
+    int k = 0;
+    for (int i = 0; i < n; i++) {
+        if (poli(massiv[i]) == 1)
+            k++;
+    }
+    return k;
+}
 int k = 0;
 int vuvod(int*& _massiv) {
     string l;
@@ -41,11 +48,10 @@ int vuvod(int*& _massiv) {
 void copy(int*& massiv, int n) {
     int start = clock();
     int j = 0;
-    k = n;
+    k = n + kol_vo_poli(massiv, n);
     int* _massiv = new int[k];
     for (int i = 0; i < n; i++) {
         if (poli(massiv[i]) == 1) {
-          k = k + 1;
             _massiv[j] = massiv[i];
             j = j + 1;
             _massiv[j] = massiv[i];
@@ -56,6 +62,9 @@ void copy(int*& massiv, int n) {
         j = j + 1;
     }
     system("cls");
+    int end = clock();
+    int t = end - start;
+    cout << "Vremia vupolnenia: " << t << endl;
     cout << "Date save" << endl;
     vuvod(_massiv);
 }
